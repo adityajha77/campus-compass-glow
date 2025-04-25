@@ -7,25 +7,28 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Teachers from "./pages/Teachers";
 import NotFound from "./pages/NotFound";
+import React from 'react'; // Ensure React is imported
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-background antialiased">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/teachers" element={<Teachers />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background antialiased">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/teachers" element={<Teachers />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
       </BrowserRouter>
-      <Toaster />
-      <Sonner />
-    </TooltipProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 export default App;
